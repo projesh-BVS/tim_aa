@@ -5,8 +5,8 @@ import Provider from "@/components/Authentication/Provider";
 const roboto = Roboto_Flex({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "TIF Dashboard",
-  description: "Administrator dashboard for Try It First",
+  title: "TIM Dashboard",
+  description: "Administrator dashboard for Try It Mirror",
 };
 
 export default function RootLayout({ children, session }) {
