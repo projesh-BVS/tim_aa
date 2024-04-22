@@ -1,0 +1,30 @@
+{
+  "name": "tim_aa",
+  "version": "0.9.7",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --experimental-https",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@google/model-viewer": "^3.3.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "axios": "^1.6.0",
+    "chart.js": "^4.4.2",
+    "next": "latest",
+    "next-auth": "^4.24.7",
+    "react": "latest",
+    "react-data-table-component": "^7.6.2",
+    "react-dom": "latest",
+    "react-drag-drop-files": "^2.3.10",
+    "swr": "^2.2.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
+  }
+}
