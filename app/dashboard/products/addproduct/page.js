@@ -5,7 +5,7 @@ import ProductUploadCard_Sizes from "@/components/Dashboard/DashboardProducts/Pr
 import ProductUploadCard_Model from "@/components/Dashboard/DashboardProducts/ProductUploadCard_Model";
 import ProductUploadCard_Pricing from "@/components/Dashboard/DashboardProducts/ProductUploadCard_Pricing";
 import useOwner from "@/hooks/useOwner";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
