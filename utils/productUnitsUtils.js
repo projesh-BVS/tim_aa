@@ -24,10 +24,11 @@ const sizeUnits = [
 ];
 
 const bodyPositions = [
-  { id: 1, display: "Ears", apiVal: "ear" },
-  { id: 2, display: "Neck", apiVal: "neck" },
-  { id: 3, display: "Torso", apiVal: "torso" },
-  { id: 4, display: "Legs", apiVal: "legs" },
+  { id: 1, display: "Head", apiVal: "head" },
+  { id: 2, display: "Ears", apiVal: "ear" },
+  { id: 3, display: "Neck", apiVal: "neck" },
+  { id: 4, display: "Torso", apiVal: "torso" },
+  { id: 5, display: "Legs", apiVal: "legs" },
 ];
 
 const currCodes = [
@@ -117,7 +118,7 @@ export function GetDataDimensionIndex(dataDimensionApiVal) {
   return null;
 }
 
-export function GetDataBodyPos(dataBodyPosApiVal, showLogs) {
+export function GetDataBodyPos(dataBodyPosApiVal, showLogs = true) {
   for (let index = 0; index < bodyPositions.length; index++) {
     showLogs &&
       console.log(

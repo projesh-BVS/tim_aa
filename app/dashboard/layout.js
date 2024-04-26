@@ -12,8 +12,8 @@ import {
 } from "@heroicons/react/24/solid";
 
 export const metadata = {
-  title: "TIF Dashboard",
-  description: "Administrator dashboard for Try It First",
+  title: "TIM Dashboard",
+  description: "Administrator dashboard for Try It Mirror",
 };
 
 export default function DashboardLayout({ children }) {

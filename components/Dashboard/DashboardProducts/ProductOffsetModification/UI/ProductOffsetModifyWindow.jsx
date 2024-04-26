@@ -16,6 +16,7 @@ import { useSearchParams } from "next/navigation";
 const ProductOffsetModifyWindow = ({
   statusDataUploading,
   productInfo,
+  callback_OnFieldValueChange,
   callback_OnSubmit,
   callback_OnClose,
 }) => {
@@ -32,16 +33,29 @@ const ProductOffsetModifyWindow = ({
     setIsUploadingData(statusDataUploading);
   }, [statusDataUploading]);
 
+  function GetCallbackValue(fieldName, fieldValue) {
+    let target = { name: "", value: "" };
+    let e = { target };
+
+    e.target.name = fieldName;
+    e.target.value = fieldValue;
+
+    return e;
+  }
+
   function Callback_OnSizeChange(val) {
     setCurrSize(val);
+    callback_OnFieldValueChange(GetCallbackValue("sizeFactor", val));
   }
 
   function Callback_OnOffsetChange_Vertical(val) {
     setCurrOffsetY(val);
+    callback_OnFieldValueChange(GetCallbackValue("armatureOffsetY", val));
   }
 
   function Callback_OnOffsetChange_Horizontal(val) {
     setCurrOffsetX(val);
+    callback_OnFieldValueChange(GetCallbackValue("armatureOffsetX", val));
   }
 
   function Callback_OnToggleControls(e) {

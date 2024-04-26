@@ -84,7 +84,7 @@ export default function Owners() {
         </section>
       )}
 
-      {!isAllOwnersError && (
+      {!isAllOwnersLoading && !isAllOwnersError && (
         <section className="flex px-6 gap-4 -mt-6 w-full items-center justify-center">
           <OwnerModifyModal
             doOpen={openAddModal}
@@ -143,7 +143,7 @@ export default function Owners() {
                 key={owner.ownerDetails[0].ownerID}
                 index={index}
                 ownerData={owner}
-                isValidatingData={isAllOwnersValidating}
+                isValidatingData={false}
                 editOwnerCallback={Callback_Modal_Edit_OnOpen}
               />
             ))}

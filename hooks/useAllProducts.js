@@ -19,6 +19,7 @@ export function useAllProducts(id = 0, useSessionData = true) {
 
   const {
     data: allCompaniesData,
+    mutate: allCompaniesMutate,
     error: allCompaniesError,
     isLoading: isCompaniesLoading,
   } = useSWR(
@@ -49,6 +50,7 @@ export function useAllProducts(id = 0, useSessionData = true) {
   return {
     companies: allCompanies,
     products: allProducts,
+    allProductsMutate: allCompaniesMutate,
     isAllProductsLoading: isLoading,
     isAllProductsError,
   };

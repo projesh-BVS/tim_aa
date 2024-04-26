@@ -41,13 +41,6 @@ const OwnerCompModifyForm = ({
               showSubtitle={GetHeader_ShowSubtitle(formMode)}
             />
 
-            {/*<OutletModifyForm_Body
-              formMode={formMode}
-              outletInfo={outletInfo}
-              companyList={companyList}
-              comapnySelectedInitialID={companySelectedID}
-              onFieldChangeCallback={OnFieldChange}
-            />*/}
             <OwnerCompModifyForm_Body
               formMode={formMode}
               companyInfo={companyInfo}

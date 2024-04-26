@@ -20,13 +20,11 @@ import ModalDialogConfirm from "@/components/Common/ModalDialogConfirm";
 import useProduct from "@/hooks/useProduct";
 
 const EditProduct = ({ params }) => {
-  //const { data: session } = useSession();
   const router = useRouter();
 
   const { product, isProductLoading, isProductError } = useProduct(
     params.productID
   );
-  //console.log(product);
 
   useEffect(() => {
     if (product) {
@@ -118,6 +116,7 @@ const EditProduct = ({ params }) => {
     //Set fields
     console.log("Product Data" + JSON.stringify(product.data));
     setFields(JSON.parse(JSON.stringify(product.data)));
+    //gateKeeper = true;
   }
 
   const handleChange = (e) => {
@@ -282,10 +281,13 @@ const EditProduct = ({ params }) => {
         owner.ownerDetails.length > 0 &&
         !isOwnerError &&
         product &&
+        product != undefined &&
         product.data != null &&
+        !isProductLoading &&
         !isProductError &&
         fields.companyID != "" &&
-        owner.companyList && (
+        owner.companyList &&
+        isFormFilled && (
           <form className="flex flex-col gap-6 items-center w-full h-full overflow-auto -mt-6">
             <section className="flex px-6 gap-4 w-full items-center justify-center">
               <ProductUploadCard_Model

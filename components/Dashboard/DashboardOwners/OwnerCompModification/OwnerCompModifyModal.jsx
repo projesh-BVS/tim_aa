@@ -2,7 +2,10 @@ import ModifyNotification from "@/components/Common/ModificationModal/UI/ModifyN
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import OwnerCompModifyForm from "./UI/OwnerCompModifyForm";
-import { GetCompanyChangeMsg_Add } from "@/libs/Company Libs/CompanyChangeMsgs";
+import {
+  GetCompanyChangeMsg_Add,
+  GetCompanyChangeMsg_Info_Update,
+} from "@/libs/Company Libs/CompanyChangeMsgs";
 import axios from "axios";
 
 const OwnerCompModifyModal = ({
@@ -20,16 +23,34 @@ const OwnerCompModifyModal = ({
     useState(null);
   const [isFormFilled, setIsFormFilled] = useState(false);
 
-  const [fields, setFields] = useState({
+  const [addFields, setAddFields] = useState({
     companyName: companyInfo ? companyInfo.companyName : "",
     companyAddress: companyInfo ? companyInfo.companyAddress : "",
     ownerID: companyInfo ? companyInfo.ownerID : -1,
+    companyGST: companyInfo ? companyInfo.companyGST : "",
+  });
+
+  const [editFields, setEditFields] = useState({
+    companyID: companyInfo ? companyInfo.companyID : "",
+    companyLogo: companyInfo ? companyInfo.companyLogo : "",
+    companyName: companyInfo ? companyInfo.companyName : "",
+    companyAddress: companyInfo ? companyInfo.companyAddress : "",
+    ownerID: companyInfo ? companyInfo.ownerID : -1,
+    companyGST: companyInfo ? companyInfo.companyGST : "",
+    categories: companyInfo ? companyInfo.categories : "",
   });
 
   useEffect(() => {
     if (companyInfo) {
-      Log("Setting Company Data: " + JSON.stringify(companyInfo), showLogs);
-      SetCompanyData(companyInfo);
+      Log(
+        "Modal Mode: " +
+          modalMode +
+          " | Setting Company Data: " +
+          JSON.stringify(companyInfo),
+        showLogs
+      );
+      if (modalMode == "Add") SetCompanyDataAdd(companyInfo);
+      if (modalMode == "Edit") SetCompanyDataEdit(companyInfo);
     }
   }, [companyInfo]);
 
@@ -38,30 +59,61 @@ const OwnerCompModifyModal = ({
     else CloseModal();
   }, [doOpen]);
 
-  function SetCompanyData(companyInfo) {
-    setFields({
+  function SetCompanyDataAdd(companyInfo) {
+    console.log("COMPANY INFO- " + JSON.stringify(companyInfo));
+    setAddFields({
       companyName: companyInfo ? companyInfo.companyName : "",
       companyAddress: companyInfo ? companyInfo.companyAddress : "",
       ownerID: companyInfo ? companyInfo.ownerID : -1,
+      companyGST: companyInfo ? companyInfo.companyGST : "",
+    });
+  }
+
+  function SetCompanyDataEdit(companyInfo) {
+    console.log("COMPANY INFO- " + JSON.stringify(companyInfo));
+    setEditFields({
+      companyID: companyInfo ? companyInfo.companyID : "",
+      companyLogo: companyInfo ? companyInfo.companyLogo : "",
+      companyName: companyInfo ? companyInfo.companyName : "",
+      companyAddress: companyInfo ? companyInfo.companyAddress : "",
+      ownerID: companyInfo ? companyInfo.ownerID : -1,
+      companyGST: companyInfo ? companyInfo.companyGST : "",
+      categories: companyInfo ? companyInfo.categories : "",
     });
   }
 
   const IsFormValid = () => {
-    Log(
-      "Checking form validity. Form Data - " + Object.values(fields),
-      showLogs
-    );
-    return Object.values(fields).every((value) => value || value === 0);
+    if (modalMode == "Add") {
+      Log(
+        "Checking form validity. Form Data - " + Object.values(addFields),
+        showLogs
+      );
+      return Object.values(addFields).every((value) => value || value === 0);
+    }
+
+    if (modalMode == "Edit") {
+      Log(
+        "Checking form validity. Form Data - " + Object.values(editFields),
+        showLogs
+      );
+      return Object.values(editFields).every((value) => value || value === 0);
+    }
   };
 
   const HandleFieldValueChange = (e) => {
     const { name, value } = e.target;
-    Log("Handling Field Value Change | Field: " + name + " | Value: " + value);
-    setFields({ ...fields, [name]: value });
+    Log(
+      "Handling Field Value Change | Field: " + name + " | Value: " + value,
+      showLogs
+    );
+    if (modalMode == "Add") setAddFields({ ...addFields, [name]: value });
+    if (modalMode == "Edit") setEditFields({ ...editFields, [name]: value });
   };
 
   const HandleSubmit_Add = async (event) => {
     Log("Initiating submitting company add", showLogs);
+
+    Log("Add Form Data- " + JSON.stringify(addFields), showLogs);
 
     event.preventDefault();
     if (IsFormValid()) {
@@ -70,7 +122,7 @@ const OwnerCompModifyModal = ({
       try {
         const response = await axios.post(
           "https://f2zxw8fu5k.execute-api.ap-south-1.amazonaws.com/TryItMirror/company",
-          fields
+          addFields
         );
 
         if (response.status === 200) {
@@ -92,6 +144,46 @@ const OwnerCompModifyModal = ({
           showLogs
         );
         setStatusNotificationContent(GetCompanyChangeMsg_Add(false));
+      }
+      setIsUploadingData(false);
+      setShowStatusNotification(true);
+    }
+  };
+
+  const HandleSubmit_Edit = async (event) => {
+    Log("Initiating submitting company edit", showLogs);
+
+    Log("Edit Form Data- " + JSON.stringify(editFields), showLogs);
+
+    event.preventDefault();
+    if (IsFormValid()) {
+      setIsUploadingData(true);
+
+      try {
+        const response = await axios.patch(
+          "https://f2zxw8fu5k.execute-api.ap-south-1.amazonaws.com/TryItMirror/company",
+          editFields
+        );
+
+        if (response.status === 200) {
+          Log(
+            "Edit Company Successful | Response: " + JSON.stringify(response),
+            showLogs
+          );
+          setStatusNotificationContent(GetCompanyChangeMsg_Info_Update(true));
+        } else {
+          Log(
+            "Edit Company Failed | Response: " + JSON.stringify(response),
+            showLogs
+          );
+          setStatusNotificationContent(GetCompanyChangeMsg_Info_Update(false));
+        }
+      } catch (err) {
+        Log(
+          "Edit Company Failed in catch | Error: " + JSON.stringify(err),
+          showLogs
+        );
+        setStatusNotificationContent(GetCompanyChangeMsg_Info_Update(false));
       }
       setIsUploadingData(false);
       setShowStatusNotification(true);
@@ -139,7 +231,7 @@ const OwnerCompModifyModal = ({
               formMode={modalMode}
               callback_OnFieldChange={HandleFieldValueChange}
               callback_OnSubmit_Add={HandleSubmit_Add}
-              callback_OnSubmit_Edit={null}
+              callback_OnSubmit_Edit={HandleSubmit_Edit}
               callback_OnSubmit_Delete={null}
               callback_OnClose={CloseModal}
             />

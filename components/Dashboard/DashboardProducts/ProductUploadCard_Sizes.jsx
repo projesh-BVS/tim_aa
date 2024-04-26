@@ -32,7 +32,7 @@ const ProductUploadCard_Sizes = ({
     fieldsData === null ||
       fieldsData.bodyPos === null ||
       fieldsData.bodyPos === ""
-      ? getBodyPositions()[2]
+      ? getBodyPositions()[0]
       : bodyPositions[GetDataBodyPos(fieldsData.bodyPos)]
   );
 

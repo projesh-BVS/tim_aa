@@ -1,4 +1,5 @@
 const OutletUploadFormField = ({
+  disabled = false,
   fieldID,
   fieldName,
   fieldType,
@@ -16,6 +17,7 @@ const OutletUploadFormField = ({
           name={fieldName}
           type={fieldType}
           defaultValue={fieldValue}
+          disabled={disabled}
           className={`
           ${resizable ? "resize-y" : "resize-none"}
                     peer
@@ -35,6 +37,11 @@ const OutletUploadFormField = ({
                     focus:text-tif-lavender
                     focus:border-tif-lavender
                     focus:rounded-lg
+
+                    disabled:border-slate-400
+                    disabled:text-slate-400
+                    disabled:bg-slate-200
+                    disabled:pointer-events-none
                     
                     placeholder:text-transparent
                     
@@ -43,6 +50,7 @@ const OutletUploadFormField = ({
           onChange={handleChange}
         />
         <label
+          disabled={disabled}
           htmlFor={fieldID}
           className="
                     absolute
@@ -67,7 +75,9 @@ const OutletUploadFormField = ({
                     peer-focus:bg-white
                     peer-focus:text-tif-lavender
                     peer-focus:text-sm
-                    peer-focus:font-medium"
+                    peer-focus:font-medium
+                    
+                    rounded-md"
         >
           {fieldLabel}
         </label>
@@ -81,6 +91,7 @@ const OutletUploadFormField = ({
           name={fieldName}
           type={fieldType}
           defaultValue={fieldValue}
+          disabled={disabled}
           className="
                     peer
                     h-11 w-full px-4
@@ -97,8 +108,13 @@ const OutletUploadFormField = ({
                     focus:outline-none
                     focus:bg-transparent
                     focus:text-tif-lavender
-                    focus:border-tif-lavender
+                    focus:border-tif-lavender                    
                     focus:rounded-lg
+
+                    disabled:border-slate-400
+                    disabled:text-slate-400
+                    disabled:bg-slate-200
+                    disabled:pointer-events-none
                     
                     placeholder:text-transparent
                     
@@ -107,6 +123,7 @@ const OutletUploadFormField = ({
           onChange={handleChange}
         />
         <label
+          disabled={disabled}
           htmlFor={fieldID}
           className="
                     absolute
@@ -131,7 +148,9 @@ const OutletUploadFormField = ({
                     peer-focus:bg-white
                     peer-focus:text-tif-lavender
                     peer-focus:text-sm
-                    peer-focus:font-medium"
+                    peer-focus:font-medium
+                    
+                    rounded-md"
         >
           {fieldLabel}
         </label>

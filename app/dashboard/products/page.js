@@ -34,8 +34,13 @@ function Products() {
     ? parseInt(productFilterQuery)
     : -1; // Use -1 for "All"
 
-  const { companies, products, isAllProductsLoading, isAllProductsError } =
-    useAllProducts();
+  const {
+    companies,
+    products,
+    allProductsMutate,
+    isAllProductsLoading,
+    isAllProductsError,
+  } = useAllProducts();
 
   const [selectedCompany, setSelectedCompany] = useState(initialProductFilter);
 
@@ -55,6 +60,7 @@ function Products() {
 
   function Callback_Modal_ProductEditOffset_OnClose_Notification() {
     setOpenModal_ProductOffsetEdit(false);
+    allProductsMutate();
   }
 
   return (
@@ -84,7 +90,7 @@ function Products() {
         </section>
       )}
 
-      {!isAllProductsLoading && !isAllProductsError && (
+      {products && !isAllProductsLoading && !isAllProductsError && (
         <section className="relative flex px-6 gap-4 -mt-6 w-full items-center justify-center">
           <ProductOffsetModifyModal
             doOpen={openModal_ProductOffsetEdit}
