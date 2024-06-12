@@ -48,7 +48,7 @@ const OwnerCompModifyForm_Body = ({
             <OutletUploadFormField
               fieldID="companyGST"
               fieldName="companyGST"
-              fieldType="number"
+              fieldType="text"
               fieldLabel="GSTIN"
               fieldValue={companyInfo != null ? companyInfo.companyGST : null}
               handleChange={callback_OnFieldChange}
@@ -95,7 +95,7 @@ const OwnerCompModifyForm_Body = ({
             <OutletUploadFormField
               fieldID="companyGST"
               fieldName="companyGST"
-              fieldType="number"
+              fieldType="text"
               fieldLabel="GSTIN"
               fieldValue={companyInfo != null ? companyInfo.companyGST : null}
               handleChange={callback_OnFieldChange}
