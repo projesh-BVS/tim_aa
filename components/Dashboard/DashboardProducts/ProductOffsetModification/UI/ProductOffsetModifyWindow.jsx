@@ -91,7 +91,7 @@ const ProductOffsetModifyWindow = ({
                 offset_Horizontal_Max={100}
                 offset_Horizontal_Curr={currOffsetX}
                 size_Min={1}
-                size_Max={200}
+                size_Max={100}
                 size_Curr={currSize}
                 callback_OnOffsetChange_Vertical={
                   Callback_OnOffsetChange_Vertical
