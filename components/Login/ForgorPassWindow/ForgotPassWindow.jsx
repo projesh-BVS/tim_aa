@@ -7,14 +7,20 @@ const ForgotPassWindow = ({ doShow, callback_OnCancel }) => {
   const [isOpen, setIsOpen] = useState(doShow);
   const [windowMode, setWindowMode] = useState("GenerateOTP");
   const [animateInvalid, setAnimateInvalid] = useState(false);
+  const [requestedEmail, setRequestedEmail] = useState("");
 
   useEffect(() => {
     setIsOpen(doShow);
     if (doShow) setWindowMode("GenerateOTP");
   }, [doShow]);
 
-  function Callback_OnSuccess_OTPGenerated() {
+  function Callback_OnSuccess_OTPGenerated(reqEmail) {
+    setRequestedEmail(reqEmail);
     setWindowMode("GeneratePass");
+  }
+
+  function Callback_OnSuccess_PasswordUpdated() {
+    callback_OnCancel();
   }
 
   return (
@@ -44,7 +50,14 @@ const ForgotPassWindow = ({ doShow, callback_OnCancel }) => {
             callback_OnClick_BtnBack={callback_OnCancel}
             callback_OnSuccess_GenerateOTP={Callback_OnSuccess_OTPGenerated}
           />
-          <GeneratePassForm doShow={windowMode == "GeneratePass"} />
+          <GeneratePassForm
+            doShow={windowMode == "GeneratePass"}
+            otpCharLength={6}
+            requestEmail={requestedEmail}
+            callback_OnSuccess_UpdatePassword={
+              Callback_OnSuccess_PasswordUpdated
+            }
+          />
         </div>
 
         {/*<button

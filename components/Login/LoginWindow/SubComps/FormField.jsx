@@ -7,6 +7,7 @@ const FormField = ({
   fieldType,
   fieldLabel,
   fieldIcon,
+  fieldValue = null,
   autoComplete = null,
   handleChange,
 }) => {
@@ -17,6 +18,7 @@ const FormField = ({
       <input
         id={fieldID}
         name={fieldName}
+        defaultValue={fieldValue}
         type={
           fieldType != "password"
             ? fieldType

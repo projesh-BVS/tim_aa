@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "TIF Dashboard",
-  description: "Administrator dashboard for Try It First",
+  title: "TIM Dashboard",
+  description: "Administrator dashboard for Try It Mirror",
 };
 
 export default function OwnersLayout({ children }) {
