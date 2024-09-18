@@ -39,7 +39,7 @@ const Plugin_PreviewButton = ({
         </div>
       </div>
       <h1 className="flex items-center justify-center w-full h-full font-medium text-base">
-        View In Your Space
+        Try It On Yourself
       </h1>
     </a>
   );

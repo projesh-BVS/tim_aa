@@ -78,7 +78,7 @@ const Plugin_CodeGenerator = ({
       color: ${col_Txt_Normal}; /* Apply text color */
       transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
     ">
-      View In Your Space
+      Try It On Yourself
     </h1>
   </a>
 {% else %}
@@ -153,7 +153,7 @@ const Plugin_CodeGenerator = ({
         color: ${col_Txt_Normal}; /* Apply text color */
         transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
       ">
-        View In Your Space
+        Try It On Yourself
       </h1>
     </a>
 </body>

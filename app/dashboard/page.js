@@ -1,6 +1,7 @@
 "use client";
 import DashInfoCard from "@/components/Dashboard/DashInfoCard";
 import DashPageHeader from "@/components/Dashboard/DashPageHeader";
+import HomePluginGuideCard from "@/components/Dashboard/DashboardHome/HomePluginGuideCard";
 import HomePrimaryInfoCard from "@/components/Dashboard/DashboardHome/HomePrimaryInfoCard";
 import HomeSecondaryInfoCard from "@/components/Dashboard/DashboardHome/HomeSecondaryInfoCard";
 import useOwner from "@/hooks/useOwner";
@@ -106,6 +107,15 @@ export default function Dashboard() {
             />
           </section>
         )}
+
+      {owner && owner.ownerDetails.length > 0 && (
+        <section
+          className="animate-slideInSpringedLeft flex px-6 gap-4 w-full items-center justify-center"
+          style={{ animationDelay: `400ms` }}
+        >
+          <HomePluginGuideCard />
+        </section>
+      )}
     </main>
   );
 }
