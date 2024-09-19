@@ -184,7 +184,7 @@ const PluginWindowBody = ({ pluginMode, companies, products, showLogs }) => {
 
     try {
       const response = await axios.get(
-        "https://0zwhtezm4f.execute-api.ap-south-1.amazonaws.com/TryItFirst/plugin/arbtn?ownerID=" +
+        "https://f2zxw8fu5k.execute-api.ap-south-1.amazonaws.com/TryItMirror/plugin/arbtn?ownerID=" +
           ownerID
       );
 
@@ -231,7 +231,7 @@ const PluginWindowBody = ({ pluginMode, companies, products, showLogs }) => {
 
     try {
       const response = await axios.patch(
-        "https://0zwhtezm4f.execute-api.ap-south-1.amazonaws.com/TryItFirst/plugin/arbtn",
+        "https://f2zxw8fu5k.execute-api.ap-south-1.amazonaws.com/TryItMirror/plugin/arbtn",
         {
           ownerID: ownerID,
           color_Btn_BG_Normal: btnStyle_Current.color_Btn_BG_Normal,
