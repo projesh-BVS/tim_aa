@@ -21,6 +21,14 @@ const GenerateReportsGraphData = (
     for (let j = 0; j < Object.keys(analyticsAPIdata[i]).length; j++) {
       var currKey = Object.keys(analyticsAPIdata[i])[j];
       var currValue = Object.values(analyticsAPIdata[i])[j];
+      if (chartName == "Category Views")
+        console.log(
+          chartName +
+            " | Current Key: " +
+            currKey +
+            " | Current Val: " +
+            currValue
+        );
 
       if (currKey === keyXAxis) {
         xAxisData.push(currValue);

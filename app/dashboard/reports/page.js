@@ -4,7 +4,6 @@ import ReportsCompanySelector from "@/components/Dashboard/DashboardReports/Repo
 import ReportsTable from "@/components/Dashboard/DashboardReports/ReportsTable";
 import useOwner from "@/hooks/useOwner";
 import { PresentationChartLineIcon } from "@heroicons/react/24/solid";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function Reports() {
@@ -62,10 +61,7 @@ export default function Reports() {
       )}
 
       {owner && owner.ownerDetails.length > 0 && !isOwnerError && (
-        <section className="flex flex-col px-6 pb-6 gap-4 w-full h-screen items-center justify-start overflow-auto">
-          {/*<div className="flex flex-col items-center justify-between w-full p-2 lg:p-4 gap-2 rounded-xl shadow-md bg-white">
-            <DataTable columns={columns} data={data}></DataTable>
-          </div>*/}
+        <section className="flex flex-col px-6 pb-6 gap-4 w-full h-screen items-center justify-start overflow-auto">          
           {owner.companyList
             .filter(
               (company) =>

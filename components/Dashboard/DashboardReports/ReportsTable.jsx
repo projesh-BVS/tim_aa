@@ -15,6 +15,8 @@ const ReportsTable = ({ index, companyInfo }) => {
     setReportViewMode(viewMode);
   }
 
+  console.log(analytics);
+
   return (
     <section
       className="animate-slideInSpringedLeft flex shrink-0 flex-col items-center justify-center w-full rounded-xl shadow-md bg-white overflow-clip"
@@ -31,7 +33,10 @@ const ReportsTable = ({ index, companyInfo }) => {
       {analytics && analytics.data && analytics.data.length == 0 && (
         <section className="flex flex-col p-4 gap-2 items-center justify-between w-full text-red-500">
           <span className="font-semibold lg:text-xl">
-            Sorry, no analytics data found
+            Sorry, no analytics data found for{" "}
+            <span className="italic text-tif-blue">
+              {companyInfo.companyName}
+            </span>
           </span>
           <span className="font-light text-xs lg:text-sm">
             This page will show analytics when they have been generated
@@ -61,11 +66,65 @@ const ReportsTable = ({ index, companyInfo }) => {
               OnViewModeChangeCallback={Callback_OnViewModeChange}
             />
             {reportViewMode === 1 && (
-              <ReportsTableContent analyticsInfo={analytics.data} />
+              <>
+                <ReportsTableContent
+                  tableName={"Product Report"}
+                  analyticsInfo={analytics.data}
+                  tableColumns={[
+                    {
+                      name: "Product Name",
+                      selector: (row) => row.productName,
+                      sortable: true,
+                    },
+                    {
+                      name: "Product ID",
+                      selector: (row) => row.productID,
+                      sortable: true,
+                    },
+                    {
+                      name: "Product SKU",
+                      selector: (row) => row.productSKU,
+                      sortable: true,
+                    },
+                    {
+                      name: "Views AR",
+                      selector: (row) => row.ARviews,
+                      sortable: true,
+                    },
+                    {
+                      name: "Duration AR",
+                      selector: (row) => row.durationAR,
+                      sortable: true,
+                    },
+                    {
+                      name: "Loadtime AR",
+                      selector: (row) => row.ARloadtime,
+                      sortable: true,
+                    },
+                  ]}
+                />
+
+                <ReportsTableContent
+                  tableName={"Category Report"}
+                  analyticsInfo={analytics.catData}
+                  tableColumns={[
+                    {
+                      name: "Category",
+                      selector: (row) => row.catName,
+                      sortable: true,
+                    },
+                    {
+                      name: "Views",
+                      selector: (row) => row.catView,
+                      sortable: true,
+                    },                    
+                  ]}
+                />
+              </>
             )}
 
             {reportViewMode === 0 && (
-              <ReportsGraphsContent analyticsInfo={analytics.data} />
+              <ReportsGraphsContent analyticsInfo={analytics} />
             )}
           </section>
         )}

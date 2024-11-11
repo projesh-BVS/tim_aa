@@ -40,6 +40,13 @@ const msg_Company_Info_Update_Failure = {
   ButtonText: "Close",
 };
 
+const msg_Company_Info_Update_Failure_URL = {
+  Type: "Error",
+  Title: "URL Exists",
+  Description: "Failed to update company information. The URL already exists. Please enter a unique URL",
+  ButtonText: "Close",
+}
+
 const msg_Company_Cat_Add_Success = (catName) => {
   let returnMsg = {
     Type: "Success",
@@ -143,6 +150,10 @@ export function GetCompanyChangeMsg_Info_Update(isSuccess) {
   return isSuccess
     ? msg_Company_Info_Update_Success
     : msg_Company_Info_Update_Failure;
+}
+
+export function GetCompanyChangeMsg_InfoURL_Failed() {
+  return msg_Company_Info_Update_Failure_URL;
 }
 
 export function GetCompanyChangeMsg_Cat_Add(isSuccess, categoryName) {
