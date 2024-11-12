@@ -67,6 +67,18 @@ const CompanyUploadCard_About = ({
       </div>
 
       <div className="flex flex-col items-center justify-center p-2 lg:p-4 h-auto gap-4 w-full">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full">
+          <h1 className="font-medium text-gray-400">shringar.tryitfirst.in/</h1>
+          <CompanyUploadFormField 
+            fieldID="companyURL"
+            fieldName="companyURL"
+            fieldType="text"
+            fieldLabel="Company URL"
+            fieldValue={fieldsData.companyURL? fieldsData.companyURL : fieldsData.companyID}
+            handleChange={onFieldChangeCallback}
+          />
+        </div>
+
         <CompanyUploadFormField
           fieldID="companyName"
           fieldName="companyName"

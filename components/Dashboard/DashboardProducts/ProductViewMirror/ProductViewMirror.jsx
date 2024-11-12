@@ -48,9 +48,9 @@ const ProductViewMirror = ({
     for (let i = 0; i < iFrameParams.length; i++) {
       iFrameSrc += iFrameParams[i];
       if (i != iFrameParams.length - 1) iFrameSrc += "&";
-    }
+    }    
 
-    return iFrameSrc;
+    return iFrameSrc + "&isAdmin=true";
   }
 
   function isMobile() {

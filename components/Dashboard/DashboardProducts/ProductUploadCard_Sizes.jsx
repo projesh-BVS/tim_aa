@@ -19,6 +19,7 @@ const ProductUploadCard_Sizes = ({
   handleChange,
   handleDropdown,
   fieldsData = null,
+  hasExceededProductLimits,
 }) => {
   const [selectedSizeUnit, setSelectedSizeUnit] = useState(
     fieldsData === null ||
@@ -61,6 +62,7 @@ const ProductUploadCard_Sizes = ({
             optionsArray={bodyPositions}
             onOptionSelect={setSelectedBodyPos}
             initialSelected={selectedBodyPos}
+            isDisabled={hasExceededProductLimits}
           />
         </div>
         <div className="col-span-full">
@@ -70,6 +72,7 @@ const ProductUploadCard_Sizes = ({
             onOptionSelect={setSelectedSizeUnit}
             initialSelected={selectedSizeUnit}
             msg_NotSelected="No Sizes Specified"
+            isDisabled={hasExceededProductLimits}
           />
         </div>
       </div>

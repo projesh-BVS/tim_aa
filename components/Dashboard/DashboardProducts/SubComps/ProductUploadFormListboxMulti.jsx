@@ -10,6 +10,7 @@ const ProductUploadFormListboxMulti = ({
   isDependant = false,
   initialSelected = null,
   msg_NotSelected = "No Outlets Specified",
+  isDisabled = false,
   showLogs = false,
 }) => {
   showLogs &&
@@ -94,7 +95,7 @@ const ProductUploadFormListboxMulti = ({
             {labelText}
           </Listbox.Label>
         </div>
-        <Listbox.Button className="relative w-full h-11 cursor-pointer rounded-lg bg-tif-blue hover:bg-tif-lavender text-white text-sm lg:text-base py-2 pl-4 pr-10 text-left hover:shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-tif-pink">
+        <Listbox.Button className={`${isDisabled ? "pointer-events-none bg-tif-blue/50" : "pointer-events-auto bg-tif-blue"} relative w-full h-11 cursor-pointer rounded-lg  hover:bg-tif-lavender text-white text-sm lg:text-base py-2 pl-4 pr-10 text-left hover:shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-tif-pink`}>
           <span className="block truncate">
             {initialSelected.map((selected) => selected.display).join(", ")}
             {initialSelected.length === 0 && msg_NotSelected}

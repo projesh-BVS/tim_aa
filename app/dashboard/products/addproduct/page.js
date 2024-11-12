@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 import {
   CloudArrowUpIcon,
+  ExclamationTriangleIcon,
   PlusCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
@@ -19,7 +20,9 @@ import ModalDialog from "@/components/Common/ModalDialog";
 
 const AddProduct = () => {
   const router = useRouter();
-  const { owner, isOwnerLoading, isOwnerError } = useOwner();
+  const { owner, isOwnerLoading, isOwnerError, ownerMutate } = useOwner();
+
+  const [hasExceededProductLimit, setHasExceededProductLimit] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [showUploadStatus, setShowUploadStatus] = useState(false);
@@ -38,8 +41,13 @@ const AddProduct = () => {
   const [uploadMessageCurrent, setUploadMessageCurrent] =
     useState(uploadMessageError);
 
+  function Callback_HasExceededProductLimit(hasExceeded) {
+    setHasExceededProductLimit(hasExceeded);
+  }
+
   function UploadMsgOnClose() {
     setShowUploadStatus(false);
+    ownerMutate({revalidate: true});
   }
 
   const handleDiscard = (event) => {
@@ -152,7 +160,7 @@ const AddProduct = () => {
         </section>
       )}
 
-      {owner && owner.ownerDetails.length == 0 && (
+      {owner && owner.ownerDetails?.length == 0 && (
         <section className="flex flex-col p-4 gap-2 items-center justify-between w-full text-red-500">
           <span className="font-semibold lg:text-xl">
             Sorry, there was an error while loading data
@@ -174,10 +182,20 @@ const AddProduct = () => {
         </section>
       )}
 
-      {owner && owner.ownerDetails.length > 0 && !isOwnerError && (
+      {owner && owner.ownerDetails?.length > 0 && !isOwnerError && (
         <form className="flex flex-col gap-6 items-center w-full h-full overflow-y-auto overflow-x-clip -mt-6">
+          {hasExceededProductLimit && <section className="flex items-center justify-center px-6 w-full">
+            <div className="flex items-center justify-center p-4 w-full gap-4 bg-red-500 text-white rounded-xl">
+              <ExclamationTriangleIcon className="w-12 h-12"/>
+              <div className="flex flex-col items-center justify-center gap-0">
+                <h1 className="font-medium text-lg">You have exceeded the product limit for this company</h1>
+                <h2 className="font-light text-sm">Please remove an existing product or upgrade your subscription</h2>
+              </div>
+            </div>
+          </section>}
+
           <section className="flex px-6 gap-4 w-full items-center justify-center">
-            <ProductUploadCard_Model handleFile={handleFile} />
+            <ProductUploadCard_Model handleFile={handleFile} hasExceededProductLimit={hasExceededProductLimit}/>
           </section>
 
           <section className="flex px-6 gap-4 w-full items-center justify-center">
@@ -186,6 +204,7 @@ const AddProduct = () => {
               handleChange={handleChange}
               handleDropdown={handleDropdown}
               //fieldsData={fields}
+              callback_hasExceededProductLimit={Callback_HasExceededProductLimit}
             />
           </section>
 
@@ -193,6 +212,7 @@ const AddProduct = () => {
             <ProductUploadCard_Sizes
               handleChange={handleChange}
               handleDropdown={handleDropdown}
+              hasExceededProductLimits={hasExceededProductLimit}
             />
           </section>
 
@@ -200,6 +220,7 @@ const AddProduct = () => {
             <ProductUploadCard_Pricing
               handleChange={handleChange}
               handleDropdown={handleDropdown}
+              hasExceededProductLimit={hasExceededProductLimit}
             />
           </section>
 

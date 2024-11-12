@@ -201,11 +201,13 @@ const EditProduct = ({ params }) => {
         setProductDeleted(true);
         console.log("Modal status " + showUploadStatus);
       } else {
+        console.log("Error status not 200")
         setUploadMessageCurrent(deleteMessageError);
         setShowDeleteConfirmation(false);
         setShowUploadStatus(true);
       }
     } catch (err) {
+      console.log("Error caught")
       setUploadMessageCurrent(deleteMessageError);
       setShowDeleteConfirmation(false);
       setShowUploadStatus(true);

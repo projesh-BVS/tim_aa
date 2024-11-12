@@ -33,7 +33,7 @@ const DashHeader = () => {
         </>
       )}
 
-      {owner && owner.ownerDetails.length == 0 && (
+      {owner && owner.ownerDetails?.length == 0 && (
         <>
           <div className="flex items-center justify-center h-12 p-2 gap-2 text-red-500">
             <h1>Error</h1>
@@ -79,7 +79,7 @@ const DashHeader = () => {
         </>
       )}
 
-      {owner && owner.ownerDetails.length > 0 && !isOwnerError && (
+      {owner && owner.ownerDetails?.length > 0 && !isOwnerError && (
         <>
           <div className="lg:hidden">
             <DashHeaderMobileMenu Role={owner.ownerDetails[0].role} />

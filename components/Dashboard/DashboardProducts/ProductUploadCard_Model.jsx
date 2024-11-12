@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
-const ProductUploadCard_Model = ({ handleFile, fieldsData = null }) => {
+const ProductUploadCard_Model = ({ handleFile, fieldsData = null, hasExceededProductLimit }) => {
   const [texJSONFile, setTexJSONFile] = useState(null);
   const [skeJSONFile, setSkeJSONFile] = useState(null);
   const [texPNGFile, setTexPNGFile] = useState(null);
@@ -80,6 +80,7 @@ const ProductUploadCard_Model = ({ handleFile, fieldsData = null }) => {
           isUploadingCallback={callback_IsUploading}
           statusIsUploading={statusIsUploading}
           uploadingCardName={currentUploadingCardName}
+          hasExceededProductLimit={hasExceededProductLimit}
         />
         <FileUploadCard
           displayName={"SKE JSON"}
@@ -90,6 +91,7 @@ const ProductUploadCard_Model = ({ handleFile, fieldsData = null }) => {
           isUploadingCallback={callback_IsUploading}
           statusIsUploading={statusIsUploading}
           uploadingCardName={currentUploadingCardName}
+          hasExceededProductLimit={hasExceededProductLimit}
         />
         <FileUploadCard
           displayName={"TEX PNG"}
@@ -100,6 +102,7 @@ const ProductUploadCard_Model = ({ handleFile, fieldsData = null }) => {
           isUploadingCallback={callback_IsUploading}
           statusIsUploading={statusIsUploading}
           uploadingCardName={currentUploadingCardName}
+          hasExceededProductLimit={hasExceededProductLimit}
         />
         <FileUploadCard
           displayName={"IMG PNG"}
@@ -110,6 +113,7 @@ const ProductUploadCard_Model = ({ handleFile, fieldsData = null }) => {
           isUploadingCallback={callback_IsUploading}
           statusIsUploading={statusIsUploading}
           uploadingCardName={currentUploadingCardName}
+          hasExceededProductLimit={hasExceededProductLimit}
         />
       </div>
     </section>
@@ -226,6 +230,7 @@ export function FileUploadCard({
   statusIsUploading,
   uploadingCardName,
   handleFile,
+  hasExceededProductLimit,
 }) {
   const [file, setFile] = useState(null);
   const [isTypeError, setTypeError] = useState(false);
@@ -390,7 +395,7 @@ export function FileUploadCard({
 
   return (
     <>
-      {!isCardDisabled && (
+      {!isCardDisabled && !hasExceededProductLimit && (
         <FileUploader
           disabled={isCardDisabled}
           types={fileTypes}
@@ -525,6 +530,13 @@ export function FileUploadCard({
         <div className="flex flex-col items-center justify-center w-full h-full p-4 bg-red-200 text-red-900 rounded-2xl">
           <h1>Please wait for</h1>
           <h1>{uploadingCardName + " to finish uploading"}</h1>
+        </div>
+      )}
+
+      {hasExceededProductLimit && (
+        <div className="flex flex-col items-center justify-center w-full h-full p-4 bg-red-200 text-red-900 rounded-2xl">
+          <h1>Cannot Upload</h1>
+          <h1>Product Limit Exceeded</h1>
         </div>
       )}
     </>

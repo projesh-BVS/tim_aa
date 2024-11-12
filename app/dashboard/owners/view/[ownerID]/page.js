@@ -308,7 +308,7 @@ const FiltersOwnerProducts = ({
   function HandleChange_Company(companyID) {
     setSeletedCompany(companyID);
     setOutletData(GenerateOutletData(companyID));
-    if (companyID === -1) HandleChange_Outlet(-1);
+    HandleChange_Outlet(-1);
     callback_FilterCompany(companyID);
   }
 

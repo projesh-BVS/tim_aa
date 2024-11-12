@@ -10,6 +10,7 @@ const ProductUploadFormListbox = ({
   showBelow = true,
   isDependant = false,
   initialSelected = null,
+  isDisabled = false,
   showLogs = false,
 }) => {
   showLogs &&
@@ -71,7 +72,7 @@ const ProductUploadFormListbox = ({
 
   return (
     //<Listbox value={isDependant ? (options.includes(selectedOption) ? selectedOption : options[0]) : selectedOption} by="id" onChange={handleOnChange}>
-    <Listbox value={selectedOption} by="id" onChange={handleOnChange}>
+    <Listbox value={selectedOption} by="id" onChange={handleOnChange} disabled={isDisabled}>
       <div className="relative">
         <div className="relative">
           <Listbox.Label
@@ -96,7 +97,7 @@ const ProductUploadFormListbox = ({
             {labelText}
           </Listbox.Label>
         </div>
-        <Listbox.Button className="relative w-full h-11 cursor-pointer rounded-lg bg-tif-blue hover:bg-tif-lavender text-white text-sm lg:text-base py-2 pl-4 pr-10 text-left hover:shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-tif-pink">
+        <Listbox.Button className={`${isDisabled ? "pointer-events-none bg-tif-blue/50" : "pointer-events-auto bg-tif-blue"} relative w-full h-11 cursor-pointer rounded-lg  hover:bg-tif-lavender text-white text-sm lg:text-base py-2 pl-4 pr-10 text-left hover:shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-tif-pink`}>
           <span className="block truncate">{selectedOption.display}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />

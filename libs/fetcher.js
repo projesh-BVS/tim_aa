@@ -53,8 +53,8 @@ export async function fetcher_AllCompanies(companyList) {
   return fullData;
 }
 
-export async function fetcher_Product(productID) {
-  const response = await fetch(product_baseURL + productID);
+export async function fetcher_Product(productID) {  
+  const response = await fetch(product_baseURL + productID + "&isAdmin=true");
   const data = await response.json();
   return data;
 }

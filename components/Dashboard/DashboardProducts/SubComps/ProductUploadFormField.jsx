@@ -7,6 +7,7 @@ const ProductUploadFormField = ({
   resizable = true,
   fieldValue = "",
   handleChange,
+  isDisabled = false,
 }) => {
   if (multiline) {
     return (
@@ -16,13 +17,14 @@ const ProductUploadFormField = ({
           name={fieldName}
           type={fieldType}
           defaultValue={fieldValue}
+          disabled={isDisabled}
           className={`
           ${resizable ? "resize-y" : "resize-none"}
+          ${isDisabled ? "pointer-events-none border-tif-blue/50" : "pointer-events-auto border-tif-blue"}
                     peer
                     min-h-[10rem] w-full px-4 pt-2
                     rounded-lg border-2                    
                     
-                    border-tif-blue
                     text-tif-blue
                     
                     hover:border-[3px]
@@ -49,6 +51,8 @@ const ProductUploadFormField = ({
                     left-2
                     -top-3
                     px-2
+
+                    pointer-events-none
                     
                     bg-white
                     text-tif-blue
@@ -81,12 +85,13 @@ const ProductUploadFormField = ({
           name={fieldName}
           type={fieldType}
           defaultValue={fieldValue}
-          className="
+          disabled={isDisabled}
+          className={`
+            ${isDisabled ? "pointer-events-none border-tif-blue/50" : "pointer-events-auto border-tif-blue"}
                     peer
                     h-11 w-full px-4
                     rounded-lg border-2                    
                     
-                    border-tif-blue
                     text-tif-blue
                     
                     hover:border-[3px]
@@ -102,7 +107,7 @@ const ProductUploadFormField = ({
                     
                     placeholder:text-transparent
                     
-                    transition-all"
+                    transition-all`}
           placeholder={fieldLabel}
           onChange={handleChange}
         />
@@ -113,6 +118,8 @@ const ProductUploadFormField = ({
                     left-2
                     -top-3
                     px-2
+
+                    pointer-events-none
                     
                     bg-white
                     text-tif-blue

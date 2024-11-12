@@ -14,6 +14,7 @@ const ProductUploadCard_Pricing = ({
   handleChange,
   handleDropdown,
   fieldsData = null,
+  hasExceededProductLimit,
 }) => {
   const [selectedCurrUnit, setSelectedCurrUnit] = useState(
     fieldsData === null ||
@@ -41,6 +42,7 @@ const ProductUploadCard_Pricing = ({
             onOptionSelect={setSelectedCurrUnit}
             initialSelected={selectedCurrUnit}
             showBelow={false}
+            isDisabled={hasExceededProductLimit}
           />
         </div>
         <div className="col-span-full xl:col-span-3">
@@ -51,6 +53,7 @@ const ProductUploadCard_Pricing = ({
             fieldLabel="Price"
             fieldValue={fieldsData === null ? "" : fieldsData.price}
             handleChange={handleChange}
+            isDisabled={hasExceededProductLimit}
           />
         </div>
         <div className="col-span-full xl:col-span-1">
@@ -61,6 +64,7 @@ const ProductUploadCard_Pricing = ({
             fieldLabel="Discount %"
             fieldValue={fieldsData === null ? "" : fieldsData.discountPercent}
             handleChange={handleChange}
+            isDisabled={hasExceededProductLimit}
           />
         </div>
       </div>

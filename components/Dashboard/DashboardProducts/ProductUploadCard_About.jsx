@@ -9,8 +9,10 @@ const ProductUploadCard_About = ({
   handleChange,
   handleDropdown,
   fieldsData = null,
+  callback_hasExceededProductLimit = null,
 }) => {
   var formattedCompanyList = GetFormattedCompanies(companyList);
+  const [hasExceededProductLimit, setHasExceededProductLimit] = useState(false);
 
   const [currSelectedCompany, setCurrSelectedCompany] = useState(
     fieldsData === null ||
@@ -45,7 +47,18 @@ const ProductUploadCard_About = ({
     )
   );
 
+  function HandleProductLimitCalc() {
+    if(!callback_hasExceededProductLimit) return;
+    console.log("Product Limit: " + currSelectedCompany.apiVal.productLimitLeft);
+    setHasExceededProductLimit(currSelectedCompany.apiVal.productLimitLeft <= 0);
+  }
+
   useEffect(() => {
+    if(callback_hasExceededProductLimit) callback_hasExceededProductLimit(hasExceededProductLimit);
+  }, [hasExceededProductLimit])
+
+  useEffect(() => {
+    HandleProductLimitCalc();
     handleDropdown("companyID", currSelectedCompany.id);
   }, [currSelectedCompany]);
 
@@ -75,6 +88,7 @@ const ProductUploadCard_About = ({
           optionsArray={formattedCompanyList}
           onOptionSelect={setCurrSelectedCompany}
           initialSelected={currSelectedCompany}
+          isDisabled={false}
         />
 
         {/* Outlet Dropdown */}
@@ -85,6 +99,7 @@ const ProductUploadCard_About = ({
           initialSelected={currSelectedOutlet}
           isDependant={true}
           isMultiSelect={true}
+          isDisabled={hasExceededProductLimit}
         />
 
         {/* Category Dropdown */}
@@ -94,6 +109,7 @@ const ProductUploadCard_About = ({
           onOptionSelect={setCurrSelectedCategory}
           initialSelected={currSelectedCategory}
           isDependant={true}
+          isDisabled={hasExceededProductLimit}
         />
 
         <ProductUploadFormField
@@ -109,6 +125,7 @@ const ProductUploadCard_About = ({
               : null
           }
           handleChange={handleChange}
+          isDisabled={hasExceededProductLimit}
         />
 
         <div className="col-span-full">
@@ -119,6 +136,7 @@ const ProductUploadCard_About = ({
             fieldLabel="Product Name"
             fieldValue={fieldsData === null ? "" : fieldsData.productName}
             handleChange={handleChange}
+            isDisabled={hasExceededProductLimit}
           />
         </div>
 
@@ -131,6 +149,7 @@ const ProductUploadCard_About = ({
             multiline={true}
             fieldValue={fieldsData === null ? "" : fieldsData.description}
             handleChange={handleChange}
+            isDisabled={hasExceededProductLimit}
           />
         </div>
       </div>
